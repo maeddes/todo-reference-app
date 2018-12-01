@@ -1,41 +1,76 @@
 package io.novatec.todobackend;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.ArrayList;
 
 @SpringBootApplication
 @RestController
 public class TodobackendApplication {
 
-	ArrayList<String> todos = new ArrayList<String>();
+	@Autowired
+	TodoRepository todoRepository;
 
-	@GetMapping("/todos")
-	ArrayList<String> getTodos(){
+	@GetMapping("/todos/")
+	String getTodos(){
 
-		return todos;
+		ArrayList<String> todos = new ArrayList<String>();
+
+		//for(Todo todo : todoRepository.findAll()) todos.add(todo.getTodo());
+		todoRepository.findAll().forEach(todo -> todos.add(todo.getTodo()));
+
+		return todos.toString();
 	}
 
 	@PostMapping("/todos/{todo}")
 	String addTodo(@PathVariable String todo){
 
-		todos.add(todo);
+		todoRepository.save(new Todo(todo));
 		return "added "+todo;
-
 	}
 
 	@DeleteMapping("/todos/{todo}")
-	String deleteTodo(@PathVariable String todo){
+	String removeTodo(@PathVariable String todo) {
 
-		todos.remove(todo);
-		return "delete "+todo;
+		todoRepository.deleteById(todo);
+		return "removed "+todo;
 
 	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(TodobackendApplication.class, args);
 	}
+}
+
+@Entity
+class Todo{
+
+	@Id
+	String todo;
+
+	public Todo(){}
+
+	public Todo(String todo){
+		this.todo = todo;
+	}
+
+	public String getTodo(){
+		return todo;
+	}
+
+	public void setTodo(String todo) {
+		this.todo = todo;
+	}
+
+}
+
+interface TodoRepository extends CrudRepository<Todo, String> {
+
 }
