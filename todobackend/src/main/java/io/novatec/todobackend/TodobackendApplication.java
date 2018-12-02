@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 @RestController
@@ -19,14 +20,14 @@ public class TodobackendApplication {
 	TodoRepository todoRepository;
 
 	@GetMapping("/todos/")
-	String getTodos(){
+	List<String> getTodos(){
 
-		ArrayList<String> todos = new ArrayList<String>();
+		List<String> todos = new ArrayList<String>();
 
 		//for(Todo todo : todoRepository.findAll()) todos.add(todo.getTodo());
 		todoRepository.findAll().forEach(todo -> todos.add(todo.getTodo()));
 
-		return todos.toString();
+		return todos;
 	}
 
 	@PostMapping("/todos/{todo}")
