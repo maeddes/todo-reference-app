@@ -15,7 +15,7 @@ import org.springframework.web.client.RestTemplate;
 @Controller
 public class TodouiApplication {
 
-	@Value("${backend.endpoint:http://localhost:8090}")
+	@Value("${backend.endpoint:http://localhost:8080}")
 	String endpoint;
 
 	RestTemplate template = new RestTemplate();
@@ -23,6 +23,7 @@ public class TodouiApplication {
 	@GetMapping
 	public String getItems(Model model){
 
+		System.out.println(" Invoking: "+ endpoint + "/todos/");
 		ResponseEntity<String[]> response = template.getForEntity(endpoint+"/todos/", String[].class);
 		if(response != null) model.addAttribute("items", response.getBody());
 		return "items";
@@ -32,7 +33,7 @@ public class TodouiApplication {
 	@PostMapping
 	public String addItem(String toDo){
 
-		ResponseEntity<String> response = template.postForEntity(endpoint+"/todos/"+toDo, null, String.class);
+		template.postForEntity(endpoint+"/todos/"+toDo, null, String.class);
 		return "redirect:/";
 
 	}
