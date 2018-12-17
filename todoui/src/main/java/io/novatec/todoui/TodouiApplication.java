@@ -17,7 +17,6 @@ public class TodouiApplication {
 
 	@Value("${backend.endpoint:http://localhost:8080}")
 	String endpoint;
-
 	RestTemplate template = new RestTemplate();
 
 	@GetMapping
