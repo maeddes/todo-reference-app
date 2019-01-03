@@ -15,7 +15,7 @@ import org.springframework.web.client.RestTemplate;
 @Controller
 public class TodouiApplication {
 
-	@Value("${backend.endpoint:http://localhost:8090}")
+	@Value("${backend.endpoint:http://localhost:8080}")
 	String endpoint;
 
 	RestTemplate template = new RestTemplate();
