@@ -1,5 +1,7 @@
 package io.novatec.todoui;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,9 +17,15 @@ import org.springframework.web.client.RestTemplate;
 @Controller
 public class TodouiApplication {
 
-	@Value("${backend.endpoint:http://localhost:8080}")
+	@Value("${backend.url}")
 	String endpoint;
 	RestTemplate template = new RestTemplate();
+
+	@PostConstruct
+	public void postConstruct(){
+
+		System.out.println(" UI initialized for backend at "+endpoint);
+	}
 
 	@GetMapping
 	public String getItems(Model model){
