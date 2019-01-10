@@ -4,13 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @SpringBootApplication
 @RestController
@@ -19,7 +23,7 @@ public class TodobackendApplication {
 	@Autowired
 	TodoRepository todoRepository;
 
-	@GetMapping("/todos/")
+	@GetMapping(value="/todos/",produces=MediaType.APPLICATION_JSON_VALUE)
 	List<String> getTodos(){
 
 		List<String> todos = new ArrayList<String>();

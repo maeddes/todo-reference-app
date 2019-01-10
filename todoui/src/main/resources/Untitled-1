@@ -1,0 +1,25 @@
+
+
+#    depends_on:
+#      - postgresdb
+#    environment: 
+#      - SPRING_PROFILES_ACTIVE=dev
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresdb:5432/mydb
+  postgresdb:
+    image: postgres
+    ports:
+     - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=matthias
+      - POSTGRES_DB=mydb
+
+
+      #  todoui:
+#    image: maeddes/todoui:v1
+#    ports:
+#      - "8090:8090"
+#    depends_on:
+#      - todobackend
+#    environment:
+#      - 
