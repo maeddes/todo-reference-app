@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -23,14 +22,14 @@ public class TodobackendApplication {
 	@Autowired
 	TodoRepository todoRepository;
 
-	@GetMapping(value="/todos/",produces=MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value="/todos/")
 	List<String> getTodos(){
 
 		List<String> todos = new ArrayList<String>();
 
 		//for(Todo todo : todoRepository.findAll()) todos.add(todo.getTodo());
 		todoRepository.findAll().forEach(todo -> todos.add(todo.getTodo()));
-
+		
 		return todos;
 	}
 

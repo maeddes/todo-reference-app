@@ -1,0 +1,209 @@
+apiVersion: v1
+items:
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: 2019-01-10T15:20:05Z
+    generation: 1
+    labels:
+      run: postgresdb
+    name: postgresdb
+    namespace: default
+    resourceVersion: "1564543"
+    selfLink: /apis/extensions/v1beta1/namespaces/default/deployments/postgresdb
+    uid: 358d53e7-14eb-11e9-b2d5-025000000001
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        run: postgresdb
+    strategy:
+      rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 1
+      type: RollingUpdate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          run: postgresdb
+      spec:
+        containers:
+        - env:
+          - name: POSTGRES_PASSWORD
+            value: password
+          - name: POSTGRES_USER
+            value: matthias
+          - name: POSTGRES_DB
+            value: mydb
+          image: postgres:latest
+          imagePullPolicy: Always
+          name: postgresdb
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: 2019-01-10T15:20:06Z
+      lastUpdateTime: 2019-01-10T15:20:06Z
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: 2019-01-10T15:20:05Z
+      lastUpdateTime: 2019-01-10T15:20:32Z
+      message: ReplicaSet "postgresdb-5748bc8857" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+    
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "3"
+    creationTimestamp: 2019-01-10T15:37:48Z
+    generation: 4
+    labels:
+      run: todobackend
+    name: todobackend
+    namespace: default
+    resourceVersion: "1566749"
+    selfLink: /apis/extensions/v1beta1/namespaces/default/deployments/todobackend
+    uid: aeae91cc-14ed-11e9-b2d5-025000000001
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 3
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        run: todobackend
+    strategy:
+      rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 1
+      type: RollingUpdate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          run: todobackend
+      spec:
+        containers:
+        - env:
+          - name: SPRING_PROFILES_ACTIVE
+            value: prod
+          image: maeddes/todobackend:v1
+          imagePullPolicy: IfNotPresent
+          name: todobackend
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 3
+    conditions:
+    - lastTransitionTime: 2019-01-10T15:40:49Z
+      lastUpdateTime: 2019-01-10T15:40:49Z
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: 2019-01-10T15:37:48Z
+      lastUpdateTime: 2019-01-10T15:47:08Z
+      message: ReplicaSet "todobackend-858d8d965d" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 4
+    readyReplicas: 3
+    replicas: 3
+    updatedReplicas: 3
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "2"
+    creationTimestamp: 2019-01-10T14:41:52Z
+    generation: 2
+    labels:
+      run: todoui
+    name: todoui
+    namespace: default
+    resourceVersion: "1563497"
+    selfLink: /apis/extensions/v1beta1/namespaces/default/deployments/todoui
+    uid: de9eb1c6-14e5-11e9-b2d5-025000000001
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        run: todoui
+    strategy:
+      rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 1
+      type: RollingUpdate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          run: todoui
+      spec:
+        containers:
+        - env:
+          - name: BACKEND_PORT
+            value: "8080"
+          image: todoui:v0.1
+          imagePullPolicy: IfNotPresent
+          name: todoui
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: 2019-01-10T14:41:52Z
+      lastUpdateTime: 2019-01-10T14:41:52Z
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: 2019-01-10T14:41:52Z
+      lastUpdateTime: 2019-01-10T15:05:47Z
+      message: ReplicaSet "todoui-fd9f9ff68" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 2
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""
