@@ -1,6 +1,7 @@
 package io.novatec.todobackend;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.repository.CrudRepository;
@@ -18,6 +19,23 @@ import java.util.Map;
 @SpringBootApplication
 @RestController
 public class TodobackendApplication {
+
+	@Value("${HOSTNAME: unset}")
+	String instance;
+
+	@GetMapping("/getInstance")
+	String getInstance() {
+
+		return instance;
+	}
+
+	@GetMapping("/kill")
+	String kill() {
+
+		return "fixed";
+		//System.exit(0);
+
+	}
 
 	@Autowired
 	TodoRepository todoRepository;
