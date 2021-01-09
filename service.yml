@@ -1,0 +1,52 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: 2019-02-19T12:36:42Z
+    labels:
+      component: apiserver
+      provider: kubernetes
+    name: kubernetes
+    namespace: default
+    resourceVersion: "305858"
+    selfLink: /api/v1/namespaces/default/services/kubernetes
+    uid: 02ecd96a-3443-11e9-bc34-025000000001
+  spec:
+    clusterIP: 10.96.0.1
+    ports:
+    - name: https
+      port: 443
+      protocol: TCP
+      targetPort: 6443
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: 2019-02-19T12:42:41Z
+    labels:
+      app: simpleweb
+    name: simple-lb
+    namespace: default
+    resourceVersion: "306336"
+    selfLink: /api/v1/namespaces/default/services/simple-lb
+    uid: d8932f5d-3443-11e9-bc34-025000000001
+  spec:
+    clusterIP: 10.97.40.202
+    ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      app: simpleweb
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""

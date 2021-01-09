@@ -1,0 +1,120 @@
+apiVersion: v1
+items:
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: 2019-02-19T12:37:09Z
+    generation: 2
+    labels:
+      app: simpleweb
+    name: simpleweb
+    namespace: default
+    resourceVersion: "305954"
+    selfLink: /apis/extensions/v1beta1/namespaces/default/deployments/simpleweb
+    uid: 12f657f4-3443-11e9-bc34-025000000001
+  spec:
+    progressDeadlineSeconds: 2147483647
+    replicas: 2
+    revisionHistoryLimit: 2147483647
+    selector:
+      matchLabels:
+        app: simpleweb
+    strategy:
+      rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 1
+      type: RollingUpdate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: simpleweb
+      spec:
+        containers:
+        - image: maeddes/simpleweb:v0.1
+          imagePullPolicy: IfNotPresent
+          name: simpleweb
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 2
+    conditions:
+    - lastTransitionTime: 2019-02-19T12:37:09Z
+      lastUpdateTime: 2019-02-19T12:37:09Z
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    observedGeneration: 2
+    readyReplicas: 2
+    replicas: 2
+    updatedReplicas: 2
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: 2019-02-19T12:46:00Z
+    generation: 1
+    labels:
+      run: todobackend
+    name: todobackend
+    namespace: default
+    resourceVersion: "306643"
+    selfLink: /apis/extensions/v1beta1/namespaces/default/deployments/todobackend
+    uid: 4fa22ec6-3444-11e9-bc34-025000000001
+  spec:
+    progressDeadlineSeconds: 2147483647
+    replicas: 1
+    revisionHistoryLimit: 2147483647
+    selector:
+      matchLabels:
+        run: todobackend
+    strategy:
+      rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 1
+      type: RollingUpdate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          run: todobackend
+      spec:
+        containers:
+        - image: todobackend:v0.1
+          imagePullPolicy: IfNotPresent
+          name: todobackend
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: 2019-02-19T12:46:01Z
+      lastUpdateTime: 2019-02-19T12:46:01Z
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""
